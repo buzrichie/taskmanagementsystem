@@ -12,7 +12,7 @@ import java.io.IOException;
 
 @WebServlet("/edit-task")
 public class TaskEditServlet extends HttpServlet {
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         Task task = new TaskDAO().getTaskById(id);
         request.setAttribute("task", task);
