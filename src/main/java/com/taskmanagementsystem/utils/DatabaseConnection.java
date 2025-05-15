@@ -7,13 +7,18 @@ import java.sql.SQLException;
 public class DatabaseConnection {
 
     // Database credentials
-    private static final String JDBC_URL = "jdbc:mysql://localhost:3306/HospitalInformationSystem";
+    private static final String JDBC_URL = "jdbc:mysql://localhost:3306/taskmanagementsystem";
     private static final String USERNAME = "root";
     private static final String PASSWORD = "root";
 
     // Method to establish and return the connection
     public static Connection getConnection() {
         Connection connection = null;
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        }catch (ClassNotFoundException e){
+            e.printStackTrace();
+        }
 
         try {
             connection = DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD);
