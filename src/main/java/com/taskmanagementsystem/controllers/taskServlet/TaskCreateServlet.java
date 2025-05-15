@@ -2,16 +2,17 @@ package com.taskmanagementsystem.controllers.taskServlet;
 
 import com.taskmanagementsystem.dao.TaskDAO;
 import com.taskmanagementsystem.models.Task;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+
 import java.io.IOException;
-import java.util.Date;
+import java.sql.Date;
 
-@WebServlet("/create-task")
+@WebServlet("/add-task")
 public class TaskCreateServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String title = request.getParameter("title");
@@ -19,7 +20,7 @@ public class TaskCreateServlet extends HttpServlet {
         String dueDateStr = request.getParameter("dueDate");
         String status = request.getParameter("status");
 
-        Date dueDate = new Date(dueDateStr);
+        Date dueDate = Date.valueOf(dueDateStr);
 
         Task task = new Task(title, description, dueDate, status);
         new TaskDAO().addTask(task);
